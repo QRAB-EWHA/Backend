@@ -182,6 +182,7 @@ public class QuizService {
         String parentCategoryName = note.getCategory().getParentCategory() != null ? note.getCategory().getParentCategory().getName() : "";
 
         return new QuizResultDTO(
+                note.getId(),
                 note.getTitle(),
                 totalQuestions,
                 quizSet.getCreatedAt().toLocalDate().toString(),
