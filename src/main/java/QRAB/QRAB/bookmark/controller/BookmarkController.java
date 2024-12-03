@@ -1,10 +1,8 @@
 package QRAB.QRAB.bookmark.controller;
 
-import QRAB.QRAB.bookmark.dto.BookmarkRequestDTO;
-import QRAB.QRAB.bookmark.dto.BookmarkResponseDTO;
-import QRAB.QRAB.bookmark.dto.BookmarkedNoteResponseDTO;
-import QRAB.QRAB.bookmark.dto.BookmarkedQuizResponseDTO;
+import QRAB.QRAB.bookmark.dto.*;
 import QRAB.QRAB.bookmark.service.BookmarkService;
+import QRAB.QRAB.user.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +52,17 @@ public class BookmarkController {
     @GetMapping("/notes/{noteId}/quizzes")
     public ResponseEntity<BookmarkedQuizResponseDTO> getBookmarkedQuizzes(@PathVariable("noteId") Long noteId) {
         BookmarkedQuizResponseDTO response = bookmarkService.getBookmarkedQuizzes(noteId);
+        return ResponseEntity.ok(response);
+    }
+
+    // 북마크 상태 변경
+    @PostMapping("/toggle")
+    public ResponseEntity<BookmarkToggleResponseDTO> toggleBookmark(
+            @RequestBody BookmarkToggleRequestDTO request) {
+        String username = SecurityUtil.getCurrentUsername()
+                .orElseThrow(() -> new RuntimeException("No authenticated user found"));
+
+        BookmarkToggleResponseDTO response = bookmarkService.updateBookmarkStatus(username, request);
         return ResponseEntity.ok(response);
     }
 }
