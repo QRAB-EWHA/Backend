@@ -1,10 +1,7 @@
 package QRAB.QRAB.bookmark.service;
 
 import QRAB.QRAB.bookmark.domain.Bookmark;
-import QRAB.QRAB.bookmark.dto.BookmarkRequestDTO;
-import QRAB.QRAB.bookmark.dto.BookmarkResponseDTO;
-import QRAB.QRAB.bookmark.dto.BookmarkedNoteResponseDTO;
-import QRAB.QRAB.bookmark.dto.BookmarkedQuizResponseDTO;
+import QRAB.QRAB.bookmark.dto.*;
 import QRAB.QRAB.bookmark.repository.BookmarkRepository;
 import QRAB.QRAB.quiz.domain.Quiz;
 import QRAB.QRAB.quiz.repository.QuizAnswerRepository;
@@ -13,6 +10,7 @@ import QRAB.QRAB.user.domain.User;
 import QRAB.QRAB.user.repository.UserRepository;
 import QRAB.QRAB.user.util.SecurityUtil;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -121,6 +120,50 @@ public class BookmarkService {
                 .collect(Collectors.toList());
 
         response.setBookmarkedQuizzes(quizzes);
+        return response;
+    }
+
+    @Transactional
+    public BookmarkToggleResponseDTO updateBookmarkStatus(String username, BookmarkToggleRequestDTO request) {
+        User user = userRepository.findOneWithAuthoritiesByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Quiz quiz = quizRepository.findById(request.getQuizId())
+                .orElseThrow(() -> new RuntimeException("Quiz not found"));
+
+        BookmarkToggleResponseDTO response = new BookmarkToggleResponseDTO();
+
+        Optional<Bookmark> existingBookmark = bookmarkRepository.findByUserAndQuiz(user, quiz);
+
+        if (request.getStatus() == 1) {
+            if (existingBookmark.isPresent()) {
+                response.setBookmarkId(existingBookmark.get().getBookmarkId());
+                response.setStatus(1);
+                response.setMessage("Already bookmarked");
+            } else {
+                // 새로운 북마크 생성
+                Bookmark bookmark = new Bookmark();
+                bookmark.setUser(user);
+                bookmark.setQuiz(quiz);
+                bookmark.setBookmarkedAt(LocalDateTime.now());  // 현재 시간 설정
+                bookmarkRepository.save(bookmark);
+
+                response.setBookmarkId(bookmark.getBookmarkId());
+                response.setStatus(1);
+                response.setMessage("Bookmark created successfully");
+            }
+        } else {
+            if (existingBookmark.isPresent()) {
+                // 북마크 삭제
+                bookmarkRepository.delete(existingBookmark.get());
+                response.setStatus(0);
+                response.setMessage("Bookmark removed successfully");
+            } else {
+                // 이미 북마크 없음
+                response.setStatus(0);
+                response.setMessage("No bookmark exists");
+            }
+        }
+
         return response;
     }
 }
