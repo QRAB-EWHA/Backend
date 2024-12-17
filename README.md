@@ -3,7 +3,7 @@
 <!-- 아래에 "*"..."*" 표시는 italic체로 출력하기 위해서 사용한 것입니다. -->
 <!-- "내용"에 해당하는 부분을 지우고, 여러분 과제의 내용을 작성해 주세요. -->
 
-# QRAB_FRONTEND
+# QRAB_BACKEND
 
 QRAB BE Repository
 
