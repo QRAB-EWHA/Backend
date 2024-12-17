@@ -5,11 +5,39 @@
 
 # QRAB_BACKEND
 
-QRAB BE Repository
+QRAB 프로젝트의 Spring Boot 백엔드 레포지토리입니다. 이 레포지토리는 서비스 전반의 다양한 기능을 제공합니다.
 
 ## 🎈About Source Code
 
 QRAB의 백엔드 프레임워크는 Spring Framework로, 터미널(맥 or 리눅스) 또는 명령 프롬프트(윈도우)에 아래의 명령어를 입력하여 프로젝트를 실행해주세요. <br>
+
+## 🎈Prerequisites
+
+다음 소프트웨어와 환경이 필요합니다.
+
+1. **Java Development Kit (JDK)**
+- version: Java 17 이상
+- [JDK 다운로드](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+
+2. **Spring Boot**
+- 프로젝트는 Spring Boot 기반이며, 별도의 설정은 필요 없습니다.
+- Gradle 기반으로 의존성을 관리합니다.
+
+3. **Database**
+- MySQL 8.0
+- [MySQL 다운로드](https://dev.mysql.com/downloads/mysql/)
+
+4. Git
+- 버전 관리 툴로 Git이 설치되어 있어야 합니다.
+- [Git 다운로드](https://git-scm.com/downloads)
+
+5. IntelliJ IDEA
+- Java 기반 프로젝트 실행을 위해 필요한 개발 환경입니다.
+- [IntelliJ IDEA 다운로드](https://www.jetbrains.com/idea/download/)
+
+6. **Postman**
+- API 테스트를 위한 도구입니다.
+- [Postman 다운로드](https://www.postman.com/downloads/)
 
 ## 🎈How to build
 
