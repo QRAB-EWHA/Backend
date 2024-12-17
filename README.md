@@ -9,6 +9,22 @@ QRAB 프로젝트의 Spring Boot 백엔드 레포지토리입니다. 이 레포�
 
 ## 🎈About Source Code
 
+- **Framework**: Spring Boot  
+- **Language**: Java  
+- **Build Tool**: Gradle 
+- **Key Features**:  
+  - 회원 관리 (로그인, 회원가입 등)  
+  - 노트 저장 및 관리 기능 
+  - 퀴즈 생성 및 관리 기능
+  - 학습 분석 생성 및 관리 기능
+  - 기타 서버 로직 처리  
+- **Architecture**:  
+  - `controller`: HTTP 요청을 받아 처리하는 진입점
+  - `service`: 비즈니스 로직 구현
+  - `repository`: 데이터베이스에 접근하는 계층
+  - `domain` 또는 `entity`: 데이터베이스 매핑을 위한 도메인 모델
+  - `dto`: 요청/응답에 사용되는 데이터 전송 객체
+
 QRAB의 백엔드 프레임워크는 Spring Framework로, 터미널(맥 or 리눅스) 또는 명령 프롬프트(윈도우)에 아래의 명령어를 입력하여 프로젝트를 실행해주세요. <br>
 
 ## 🎈Prerequisites
