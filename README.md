@@ -63,9 +63,10 @@ QRAB의 백엔드 프레임워크는 Spring Framework로, 터미널(맥 or 리�
 git clone https://github.com/QRAB-EWHA/Backend.git
 ```
 
-QRAB 프로젝트를 실행하기 위해서는 application.yml을 작성해야 합니다.
-QRAB/src/main/resources/ 에 application.yml을 생성하고, 아래 코드를 복사하여 붙여넣습니다.
-대괄호 안에 있는 값은 본인의 실행 환경에 맞게 넣어줍니다.
+- 프로젝트를 실행하기 위해 application.yml을 작성해야 합니다.
+- `QRAB/src/main/resources/` 에 `application.yml`을 생성하고, 아래 코드를 복사하여 붙여넣습니다. 대괄호 안에 있는 값은 본인의 실행 환경에 맞게 넣어줍니다.
+- `application.yml` 파일을 제공받은 경우, 해당 파일의 내용을 그대로 붙여넣기 해 주세요.
+- 이미 아래 내용을 담은 `application.yml` 파일이 존재한다면 추가 작업은 필요 없습니다.
 
 ```yml
 spring:
